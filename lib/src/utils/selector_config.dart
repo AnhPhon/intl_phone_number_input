@@ -36,6 +36,18 @@ class SelectorConfig {
   /// Use safe area for selectorType=BOTTOM_SHEET
   final bool useBottomSheetSafeArea;
 
+  /// Use [bgColorSelect] to set bg color dialog, bottom sheet,.. search.
+  final Color? bgColorSelect;
+
+  /// Use [decorationSelectorBtn] to customer selector btn.
+  final BoxDecoration? decorationSelectorBtn;
+
+  /// Use [paddingSelectorBtn] to padding child item in selector btn.
+  final EdgeInsets? paddingSelectorBtn;
+
+  /// Use [suffixIconSelectorBtn] to set icon into suffix.
+  final Widget? suffixIconSelectorBtn;
+
   const SelectorConfig({
     this.selectorType = PhoneInputSelectorType.DROPDOWN,
     this.showFlags = true,
@@ -45,5 +57,9 @@ class SelectorConfig {
     this.leadingPadding,
     this.trailingSpace = true,
     this.useBottomSheetSafeArea = false,
+    this.bgColorSelect,
+    this.decorationSelectorBtn,
+    this.paddingSelectorBtn,
+    this.suffixIconSelectorBtn,
   });
 }

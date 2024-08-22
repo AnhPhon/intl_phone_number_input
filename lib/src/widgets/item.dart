@@ -40,7 +40,7 @@ class Item extends StatelessWidget {
             showFlag: showFlag,
             useEmoji: useEmoji,
           ),
-          SizedBox(width: 12.0),
+          SizedBox(width: 5),
           Text(
             '$dialCode',
             textDirection: TextDirection.ltr,
@@ -57,8 +57,7 @@ class _Flag extends StatelessWidget {
   final bool? showFlag;
   final bool? useEmoji;
 
-  const _Flag({Key? key, this.country, this.showFlag, this.useEmoji})
-      : super(key: key);
+  const _Flag({Key? key, this.country, this.showFlag, this.useEmoji}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +68,16 @@ class _Flag extends StatelessWidget {
                     Utils.generateFlagEmojiUnicode(country?.alpha2Code ?? ''),
                     style: Theme.of(context).textTheme.headlineSmall,
                   )
-                : Image.asset(
-                    country!.flagUri,
-                    width: 32.0,
-                    package: 'intl_phone_number_input',
-                    errorBuilder: (context, error, stackTrace) {
-                      return SizedBox.shrink();
-                    },
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(2),
+                    child: Image.asset(
+                      country!.flagUri,
+                      width: 32.0,
+                      package: 'intl_phone_number_input',
+                      errorBuilder: (context, error, stackTrace) {
+                        return SizedBox.shrink();
+                      },
+                    ),
                   ),
           )
         : SizedBox.shrink();

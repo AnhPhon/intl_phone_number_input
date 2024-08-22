@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Demo',
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       darkTheme: darkTheme,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -51,18 +51,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 print(value);
               },
               selectorConfig: SelectorConfig(
-                selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                useBottomSheetSafeArea: true,
-              ),
+                  paddingSelectorBtn: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+                  useBottomSheetSafeArea: true,
+                  bgColorSelect: Colors.white,
+                  useEmoji: true,
+                  decorationSelectorBtn: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  )),
               ignoreBlank: false,
               autoValidateMode: AutovalidateMode.disabled,
               selectorTextStyle: TextStyle(color: Colors.black),
               initialValue: number,
               textFieldController: controller,
               formatInput: true,
-              keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
               inputBorder: OutlineInputBorder(),
+              inputDecoration: InputDecoration(
+                border: _getOutlineInputBorder(),
+                focusedBorder: _getOutlineInputBorder(),
+                enabledBorder: _getOutlineInputBorder(),
+                disabledBorder: _getOutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.white,
+              ),
               onSaved: (PhoneNumber number) {
                 print('On Saved: $number');
               },
@@ -92,8 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getPhoneNumber(String phoneNumber) async {
-    PhoneNumber number =
-        await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'US');
+    PhoneNumber number = await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'US');
 
     setState(() {
       this.number = number;
@@ -104,5 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  OutlineInputBorder _getOutlineInputBorder() {
+    return OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(10),
+    );
   }
 }
